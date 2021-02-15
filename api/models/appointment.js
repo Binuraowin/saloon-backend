@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 
-const productShema = mongoose.Schema({
+const appointmentSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     userName:{type:String, required: true},
     date:{type:Date, required: true},
-    time: { type: TimeRanges, required: true },
-    service: { type: TimeRanges, required: true }
+    time: { type: String, required: true },
+    service: { type: String, required: true },
 });
 
-module.exports = mongoose.model('Product',productShema);
+module.exports = mongoose.model('Appointment',appointmentSchema);

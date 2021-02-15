@@ -3,12 +3,18 @@ const app = express();
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-
+const router = express.Router();
 
 app.use(morgan('dev'))
 app.use(express.static(__dirname));
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json());
+
+
+const appointmentRoutes = require('./api/routes/appointments');
+const employeeRoutes = require('./api/routes/employees');
+
+app.use('/appointments',appointmentRoutes);
 
 
 //DB config
