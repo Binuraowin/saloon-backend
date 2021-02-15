@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 
 
 //DB config
-const connection_url = '';
+const connection_url = 'mongodb://admin:admin@cluster0-shard-00-00.nctsk.mongodb.net:27017,cluster0-shard-00-01.nctsk.mongodb.net:27017,cluster0-shard-00-02.nctsk.mongodb.net:27017/saloon?ssl=true&replicaSet=atlas-mx6mbv-shard-0&authSource=admin&retryWrites=true&w=majority';
 mongoose.connect(connection_url,{
     useNewUrlParser:true,
     useUnifiedTopology:true,
