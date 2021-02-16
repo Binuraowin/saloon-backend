@@ -14,6 +14,14 @@ app.use(bodyParser.json());
 const appointmentRoutes = require('./api/routes/appointments');
 const employeeRoutes = require('./api/routes/employees');
 
+//middlewares
+app.use(express.json());
+app.use((req,res,next) =>{
+    res.setHeader('Access-Control-Allow-Origin','*'),
+        res.setHeader('Access-Control-Allow-Headers','*'),
+        next()
+})
+
 app.use('/appointments',appointmentRoutes);
 app.use('/employee',employeeRoutes);
 

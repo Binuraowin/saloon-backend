@@ -6,7 +6,7 @@ const Employee = require('../models/employee');
 
 
 exports.employee_signup = (req,res,next) =>{
-    Employee.find({userName: req.body.userName})
+    Employee.find({name: req.body.name})
     .exec()
     .then(employee => {
         if (employee.length >= 1) {
@@ -20,9 +20,14 @@ exports.employee_signup = (req,res,next) =>{
                 error: err
               });
             } else {
-              const user = new User({
+              const user = new Employee({
                 _id: new mongoose.Types.ObjectId(),
-                userName: req.body.userName,
+                name: req.body.name,
+                jobRole: req.body.jobRole,
+                service: req.body.service,
+                workingHours: req.body.workingHours,
+                workedHours: req.body.workedHours,
+                sallery: req.body.sallery,
                 password: hash
               });
               user
@@ -89,7 +94,44 @@ exports.employee_login = (req,res,next) =>{
       });
 }
 
-
+exports.get_all_employee =(req,res,next) =>{
+  Employee.find().select(
+    "name _id date time service"
+).exec()
+.then(docs => {
+    const response = {
+      count: docs.length,
+      employees: docs.map(doc => {
+        return {
+          name: doc.name,
+          jobRole: doc.jobRole,
+          service: doc.service,
+          workingHours: doc.workingHours,
+          workedHours: doc.workedHours,
+          sallery: doc.sallery,
+          _id: doc._id,
+          request: {
+            type: "GET",
+            url: "http://localhost:3000/appointments/" + doc._id
+          }
+        };
+      })
+    };
+    //   if (docs.length >= 0) {
+    res.status(200).json(response);
+    //   } else {
+    //       res.status(404).json({
+    //           message: 'No entries found'
+    //       });
+    //   }
+  })
+.catch(err => {
+    console.log(err);
+    res.status(500).json({
+      error: err
+    });
+  });
+}
 exports.employee_delete = (req, res, next) => {
     User.remove({ _id: req.params.employeeId })
       .exec()
