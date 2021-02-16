@@ -43,9 +43,13 @@ exports.appointment_get_all = (req,res,next)=>{
 
 exports.appointment_create =(req,res,next) =>{
   Appointment.find({date:req.body.date}).exec()
-  .then()
-  .catch()
-    const appointment = new Appointment({
+  .then(appointment =>{
+    if(appointment.length > 3){
+      return res.status(401).json({
+        message: "Date Fixed"
+      });
+    }else{
+      const appointment = new Appointment({
         _id: new mongoose.Types.ObjectId(),
         userName: req.body.userName,
         date: req.body.date,
@@ -71,7 +75,9 @@ exports.appointment_create =(req,res,next) =>{
           }
         });
       })
-    .catch(err => {
+    }
+  })
+  .catch(err => {
         console.log(err);
         res.status(500).json({
           error: err
