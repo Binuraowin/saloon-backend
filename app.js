@@ -15,7 +15,7 @@ const appointmentRoutes = require('./api/routes/appointments');
 const employeeRoutes = require('./api/routes/employees');
 
 app.use('/appointments',appointmentRoutes);
-
+app.use('/employee',employeeRoutes);
 
 //DB config
 const connection_url = 'mongodb://admin:admin@cluster0-shard-00-00.nctsk.mongodb.net:27017,cluster0-shard-00-01.nctsk.mongodb.net:27017,cluster0-shard-00-02.nctsk.mongodb.net:27017/saloon?ssl=true&replicaSet=atlas-mx6mbv-shard-0&authSource=admin&retryWrites=true&w=majority';
