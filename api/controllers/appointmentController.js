@@ -20,7 +20,7 @@ exports.appointment_get_all = (req,res,next)=>{
               _id: doc._id,
               request: {
                 type: "GET",
-                url: "http://localhost:3000/products/" + doc._id
+                url: "http://localhost:3000/appointments/" + doc._id
               }
             };
           })
@@ -42,6 +42,9 @@ exports.appointment_get_all = (req,res,next)=>{
 }
 
 exports.appointment_create =(req,res,next) =>{
+  Appointment.find({date:req.body.date}).exec()
+  .then()
+  .catch()
     const appointment = new Appointment({
         _id: new mongoose.Types.ObjectId(),
         userName: req.body.userName,
