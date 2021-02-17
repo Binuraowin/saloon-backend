@@ -42,10 +42,14 @@ exports.appointment_get_all = (req,res,next)=>{
 }
 
 exports.appointment_create =(req,res,next) =>{
-  Appointment.find({date:req.body.date}).exec()
+  Appointment.find({
+    date:req.body.date,
+    time:req.body.time,
+    consumer:req.body.consumer,
+  }).exec()
   .then(appointment =>{
     if(appointment.length > 3){
-      return res.status(401).json({
+      return res.status(404).json({
         message: "Date Fixed"
       });
     }else{
@@ -55,6 +59,9 @@ exports.appointment_create =(req,res,next) =>{
         date: req.body.date,
         time: req.body.time,
         service: req.body.service,
+        consumer:req.body.consumer,
+        email:req.body.email,
+        phone:req.body.phone,
 
     });
     appointment.save()
@@ -67,6 +74,9 @@ exports.appointment_create =(req,res,next) =>{
             date: result.price,
             time: result.time,
             service: result.service,
+            consumer:result.consumer,
+            email:result.email,
+            phone:result.phone,
             _id: result._id,
             request: {
               type: "POST",
