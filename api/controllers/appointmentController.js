@@ -100,9 +100,9 @@ exports.appointment_create =(req,res,next) =>{
 }
 
 exports.appointment_get_one = (req,res,next) =>{
-  const id = req.params.apointmentId;
+  const id = req.params.id;
   Appointment.findById(id)
-    .select( "userName _id date time service id")
+    .select("userName _id date time service id consumer email phone")
     .exec()
     .then(doc => {
       console.log("From database", doc);
