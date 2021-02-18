@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-
+const { v4: uuidv4 } = require('uuid');
 const Employee = require('../models/employee');
 
 
@@ -23,7 +23,7 @@ exports.employee_signup = (req,res,next) =>{
               const user = new Employee({
                 _id: new mongoose.Types.ObjectId(),
                 name: req.body.name,
-                id:req.body.id,
+                id:uuidv4(),
                 jobRole: req.body.jobRole,
                 service: req.body.service,
                 workingHours: req.body.workingHours,

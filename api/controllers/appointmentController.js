@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+const { v4: uuidv4 } = require('uuid');
 const Employee = require('../models/employee');
 const Appointment = require('../models/appointment');
 
@@ -27,7 +27,7 @@ exports.appointment_get_all = (req,res,next)=>{
           })
         };
         //   if (docs.length >= 0) {
-          res.header('Content-Range', 'Appointments 0-2/10')
+          res.header('Content-Range', 'Appointments 0-5/20')
         res.status(200).json(docs);
         //   } else {
         //       res.status(404).json({
@@ -64,7 +64,7 @@ exports.appointment_create =(req,res,next) =>{
         consumer:req.body.consumer,
         email:req.body.email,
         phone:req.body.phone,
-        id:req.body.id
+        id:uuidv4(),
 
     });
     appointment.save()
