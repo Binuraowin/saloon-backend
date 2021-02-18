@@ -17,7 +17,8 @@ const employeeRoutes = require('./api/routes/employees');
 //middlewares
 app.use(express.json());
 app.use((req,res,next) =>{
-    res.setHeader('Access-Control-Allow-Origin','*'),
+        res.setHeader('Access-Control-Expose-Headers','Content-Range'),
+        res.setHeader('Access-Control-Allow-Origin','*'),
         res.setHeader('Access-Control-Allow-Headers','*'),
         next()
 })

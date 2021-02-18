@@ -5,7 +5,9 @@ const checkAuth = require('../middleware/check-auth');
 
 router.get("/",EmployeeController.get_all_employee);
 
-router.post("/signup",EmployeeController.employee_signup);
+router.get("/admin",EmployeeController.get_admin_employee);
+
+router.post("/",EmployeeController.employee_signup);
 
 router.post("/login",EmployeeController.employee_login)
 

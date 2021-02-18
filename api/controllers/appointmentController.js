@@ -10,7 +10,7 @@ exports.appointment_get_all = (req,res,next)=>{
     ).exec()
     .then(docs => {
         const response = {
-          count: docs.length,
+          // count: docs.length,
           products: docs.map(doc => {
             return {
               userName: doc.userName,
@@ -78,10 +78,10 @@ exports.appointment_create =(req,res,next) =>{
             email:result.email,
             phone:result.phone,
             _id: result._id,
-            request: {
-              type: "POST",
-              url: "http://localhost:3000/appointments/" + result._id
-            }
+            // request: {
+            //   type: "POST",
+            //   url: "http://localhost:3000/appointments/" + result._id
+            // }
           }
         });
       })

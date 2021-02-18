@@ -23,6 +23,7 @@ exports.employee_signup = (req,res,next) =>{
               const user = new Employee({
                 _id: new mongoose.Types.ObjectId(),
                 name: req.body.name,
+                id:req.body.id,
                 jobRole: req.body.jobRole,
                 service: req.body.service,
                 workingHours: req.body.workingHours,
@@ -96,29 +97,68 @@ exports.employee_login = (req,res,next) =>{
 
 exports.get_all_employee =(req,res,next) =>{
   Employee.find().select(
-    "name _id date time service"
+    "name _id date time service id"
 ).exec()
 .then(docs => {
     const response = {
-      count: docs.length,
-      employees: docs.map(doc => {
-        return {
-          name: doc.name,
-          jobRole: doc.jobRole,
-          service: doc.service,
-          workingHours: doc.workingHours,
-          workedHours: doc.workedHours,
-          sallery: doc.sallery,
-          _id: doc._id,
-          request: {
-            type: "GET",
-            url: "http://localhost:3000/appointments/" + doc._id
-          }
-        };
-      })
+
+      // count: docs.length,
+      
+      // employees: docs.map(doc => {
+      //   return {
+      //     name: doc.name,
+      //     jobRole: doc.jobRole,
+      //     service: doc.service,
+      //     workingHours: doc.workingHours,
+      //     workedHours: doc.workedHours,
+      //     sallery: doc.sallery,
+      //     _id: doc._id,
+      //   };
+      // })
     };
     //   if (docs.length >= 0) {
-    res.status(200).json(response);
+      res.header('Content-Range', 'Employees 0-2/10')
+    // res.setHeader('X-Total-Count', docs.length);
+    console.log(res)
+    res.status(200).json(docs);
+    //   } else {
+    //       res.status(404).json({
+    //           message: 'No entries found'
+    //       });
+    //   }
+  })
+.catch(err => {
+    console.log(err);
+    res.status(500).json({
+      error: err
+    });
+  });
+}
+
+exports.get_admin_employee =(req,res,next) =>{
+  Employee.find().select(
+    "name id date time service"
+).exec()
+.then(docs => {
+    const response = {
+
+      // count: docs.length,
+      // employees: docs.map(doc => {
+      //   return {
+      //     name: doc.name,
+      //     jobRole: doc.jobRole,
+      //     service: doc.service,
+      //     workingHours: doc.workingHours,
+      //     workedHours: doc.workedHours,
+      //     sallery: doc.sallery,
+      //     _id: doc._id,
+      //   };
+      // })
+    };
+    //   if (docs.length >= 0) {
+      res.header('Content-Range', 'Employees 0-2/10')
+      console.log('admin')
+    res.status(200).json(docs);
     //   } else {
     //       res.status(404).json({
     //           message: 'No entries found'
