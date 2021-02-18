@@ -97,24 +97,24 @@ exports.employee_login = (req,res,next) =>{
 
 exports.get_all_employee =(req,res,next) =>{
   Employee.find().select(
-    "name _id date time service id"
+    "name _id service id jobRole workingHours workedHours sallery"
 ).exec()
 .then(docs => {
     const response = {
 
-      // count: docs.length,
+      count: docs.length,
       
-      // employees: docs.map(doc => {
-      //   return {
-      //     name: doc.name,
-      //     jobRole: doc.jobRole,
-      //     service: doc.service,
-      //     workingHours: doc.workingHours,
-      //     workedHours: doc.workedHours,
-      //     sallery: doc.sallery,
-      //     _id: doc._id,
-      //   };
-      // })
+      employees: docs.map(doc => {
+        return {
+          name: doc.name,
+          jobRole: doc.jobRole,
+          service: doc.service,
+          workingHours: doc.workingHours,
+          workedHours: doc.workedHours,
+          sallery: doc.sallery,
+          _id: doc._id,
+        };
+      })
     };
     //   if (docs.length >= 0) {
       res.header('Content-Range', 'Employees 0-2/10')
