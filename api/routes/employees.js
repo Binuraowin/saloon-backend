@@ -5,12 +5,12 @@ const checkAuth = require('../middleware/check-auth');
 
 router.get("/",EmployeeController.get_all_employee);
 
-router.get("/admin",EmployeeController.get_admin_employee);
+router.post("/",EmployeeController.employee_create);
 
-router.post("/",EmployeeController.employee_signup);
+router.get("/:employeeId",EmployeeController.get_one_employee);
 
-router.post("/login",EmployeeController.employee_login)
+router.post("/login",EmployeeController.employee_login);
 
-router.delete("/:employeeId",checkAuth,EmployeeController.employee_delete);
+router.delete("/:employeeId",EmployeeController.employee_delete);
 
 module.exports = router;

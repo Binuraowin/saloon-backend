@@ -9,7 +9,7 @@ router.post("/", AppointmentController.appointment_create);
 
 router.get("/:appointmentId",AppointmentController.appointment_get_one);
 
-router.patch("/:appointmentId",AppointmentController.appointment_update);
+router.put("/:appointmentId",AppointmentController.appointment_update);
 
 router.delete("/:appointmentId",AppointmentController.appointment_delete);
 
